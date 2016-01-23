@@ -4,6 +4,7 @@
 #include <memory>
 #include <iostream>
 #include <stdexcept>
+#include <sstream>
 #include <cstdlib>
 #include <ctime>
 using string = std::string;
@@ -57,9 +58,40 @@ public:
 int main() {
     std::cout << "inebriated, C++ edition v0.1\nan eta thing <http://theta.eu.org>\n\n";
     MarkovDB mdb {};
-    mdb.insertHunk("cats", "are");
-    mdb.insertHunk("are", "great");
-    mdb.insertHunk("are", "dogs");
-    mdb.insertSentenceStarter("cats");
-    mdb.build_sentence();
+    std::cout << "input sentences, newline-separated:\n";
+    std::string sentence;
+    while (!std::cin.eof()){
+        std::string sentence;
+        std::getline(std::cin, sentence);
+        std::istringstream ss;
+        ss.str(sentence);
+        std::pair<std::string,std::string> kv {"", ""};
+        std::string tok;
+        int spaces = 0;
+        bool first = true;
+        while (std::getline(ss, tok, ' ')) {
+            if (spaces++ < 2) kv.first = kv.first + (kv.first == "" ? "" : " ") + tok;
+            else kv.second = kv.second + (kv.second == "" ? "" : " ") + tok;
+            if (spaces == 2) {
+                tok = "";
+                if (first) {
+                    first = false;
+                    mdb.insertSentenceStarter(kv.first);
+                }
+            }
+            else if (spaces == 4) {
+                tok = "";
+                spaces = 0;
+                mdb.insertHunk(kv.first, kv.second);
+                kv = {"", ""};
+            }
+        }
+    }
+    std::cin.clear();
+    std::cout << "\nSentence input complete.\nGenerating sentences (Enter for new, Control-D to stop)\n\n";
+    while (!std::cin.eof()) {
+        mdb.build_sentence();
+        string str;
+        std::getline(std::cin, str);
+    };
 };

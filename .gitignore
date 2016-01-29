@@ -1,3 +1,7 @@
 *.o
 a.out
 markov
+*.cmake
+CMakeFiles/
+CMakeCache.txt
+Makefile

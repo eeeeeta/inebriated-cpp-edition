@@ -5,3 +5,5 @@ markov
 CMakeFiles/
 CMakeCache.txt
 Makefile
+docs/
+TAGS

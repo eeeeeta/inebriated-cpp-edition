@@ -36,6 +36,7 @@ int main() {
     std::cin.clear();
 
     std::cout << "\nSentence input complete.\nGenerating sentences (Enter for new, Control-D to stop)\n\n";
+    mdb.recalcWeights();
     while (!std::cin.eof()) {
         mdb.build_sentence();
         std::string str;

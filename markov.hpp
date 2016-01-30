@@ -75,13 +75,15 @@ public:
  * The markov database itself - stores sentences and a list of values for keys.
  */
     class DB {
+public:
+        using kvdb_type = std::unordered_map<string, Key *>;
+        using ssdb_objtype = std::pair<string, int>;
 private:
         void _recalcOneStrand(Key *);
         void _debugDB(void);
         Key *_weightedRNG(Key *);
-        void recalcWeights(void);
-        std::unordered_map<string,Key *>* kvdb; /**< string to Key map */
-        std::vector<string> *ssdb; /**< sentence-starter database */
+        kvdb_type* kvdb; /**< string to Key map */
+        std::vector<std::pair<string, int>> *ssdb; /**< sentence-starter database */
 
 public:
         DB();
@@ -104,6 +106,7 @@ public:
  * @exception std::invalid_argument No sentence starters exist to build a sentence from.
  */
         string build_sentence(void);
+        void recalcWeights(void);
     };
 }
 #endif

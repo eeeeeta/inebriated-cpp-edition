@@ -1,3 +1,5 @@
+.#*
+*.mkdb
 *.o
 a.out
 markov

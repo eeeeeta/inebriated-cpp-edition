@@ -107,6 +107,8 @@ public:
  */
         string build_sentence(void);
         void recalcWeights(void);
+        void doSavingThings(void);
+        void doReadingThings(void);
     };
 }
 #endif

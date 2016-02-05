@@ -3,6 +3,7 @@ project("inebriated C++ edition")
 
 add_executable(markov rand.cpp
                 markov.cpp
+                save.cpp
 		        main.cpp)
 target_compile_features(markov PRIVATE cxx_range_for)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Werror -g")

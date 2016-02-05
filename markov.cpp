@@ -72,7 +72,6 @@ DB::~DB() {
     delete ssdb;
 }
 void DB::recalcWeights(void) {
-    _debugDB();
     for (auto iter : *kvdb) {
         std::cout << "MDB: recalc'ing strand for key: " << iter.first << "\n";
         iter.second->weight = Rand::weightForKey(iter.second, kvdb);
@@ -114,7 +113,6 @@ string DB::build_sentence(void) {
         throw std::invalid_argument("No sentence starters in database.");
     string startk = Rand::randomSsdbObj(ssdb).first;
     string ret = startk;
-    _debugDB();
     std::cout << "MDB: got sentence starter: " << startk << "\n";
     auto iter = kvdb->find(startk);
     while (iter != kvdb->end()) {

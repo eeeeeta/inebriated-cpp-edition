@@ -1,16 +1,19 @@
-inebriated, C++ edition
-=======================
+inebriated, C++ edition (βeta)
+==============================
+*everybody's favourite drunkard!*
 
 ![Logo](http://i.imgur.com/afdr6cr.png)
 
 wat?
 ---
 
-This is a reimplementation of the C reimplementation of the original Node.js implementation
-of my inebriated IRC chatbot.
+The inebriated project line is a series of implementations of the same thing: a drunk AI that takes
+input sentences and uses them to form stuff that sort-of makes sense and is sometimes funny.
 
 Links to the other inebriateds:
 
+- [the inebriated project spotlight](http://theta.eu.org/inebriated-family.html)
+- [inebriated: the original edition](https://github.com/eeeeeta/inebriated-genesis)
 - [inebriated, C edition](https://github.com/eeeeeta/inebriated-c-edition)
 
 port status
@@ -20,6 +23,19 @@ I'm new with this C++ stuff, be gentle! This code so far isn't as advanced as th
 but is completely memory-safe (for now) and is much more concise (thank you, C++). It has multiple failures,
 including the addition of duplicates, that must be corrected, and many things I'd still like to add.
 
+Things that work
+----------------
 
-Consider this über-alpha.
+- Sentence input, tokenisation & storage
+- *Decent* weighting!
+- Sentence generation
+- Basic saving & loading support
 
+Things to be done
+-----------------
+
+- Recursion checking. This is a small big problem.
+- Corpus control - control of input and output sources & finer-grained saving and loading
+- Logging control. Right now, it's a firehose of debug info.
+- A nice UI maybe? And/or CLI?
+- Perhaps something to say "no, I don't like this sentence" or a hunk deletion interface

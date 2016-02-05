@@ -16,6 +16,22 @@ Links to the other inebriateds:
 - [inebriated: the original edition](https://github.com/eeeeeta/inebriated-genesis)
 - [inebriated, C edition](https://github.com/eeeeeta/inebriated-c-edition)
 
+Compile it!
+-----------
+
+This thing needs the venerable [CMake](https://cmake.org/) installed, and pretty much nothing else
+except your bog-standard C++ environment. To play around with it:
+
+    cmake -DCMAKE_BUILD_TYPE=Release .
+    make
+    
+    ./markov
+    
+If you want to compile it with the verbose debug stuff:
+
+    cmake -DCMAKE_BUILD_TYPE=Debug .
+    make
+
 port status
 -----------
 

@@ -73,13 +73,17 @@ DB::~DB() {
 }
 void DB::recalcWeights(void) {
     for (auto iter : *kvdb) {
+#ifdef DEBUG
         std::cout << "MDB: recalc'ing strand for key: " << iter.first << "\n";
+#endif
         iter.second->weight = Rand::weightForKey(iter.second, kvdb);
     }
     for (auto& pair : *ssdb) {
+#ifdef DEBUG
         std::cout << "MDB: recalc'ing weight for sentence starter: " << pair.first << "\n";
+#endif
         if (kvdb->find(pair.first) == kvdb->end()) {
-            std::cout << "MDB: sentence starter pointed to nothing\n";
+            std::cerr << "MDB: FIXME sentence starter pointed to nothing\n";
             /* FIXME: remove from database */
         }
         else pair.second = Rand::weightForKey(kvdb->find(pair.first)->second, kvdb);
@@ -93,11 +97,15 @@ void DB::insertHunk(string k, string v) {
     else {
         kvdb->insert({k, new Key {v}});
     }
+#ifdef DEBUG
     std::cout << "MDB: inserted hunk " << k << " = " << v << "\n";
+#endif
 }
 void DB::insertSentenceStarter(string ss) {
     ssdb->insert(ssdb->end(), {ss, 0});
+#ifdef DEBUG
     std::cout << "MDB: inserted sentence starter " << ss << "\n";
+#endif
 }
 void DB::_debugDB() {
     for (auto kv : *kvdb) {
@@ -113,14 +121,20 @@ string DB::build_sentence(void) {
         throw std::invalid_argument("No sentence starters in database.");
     string startk = Rand::randomSsdbObj(ssdb).first;
     string ret = startk;
+#ifdef DEBUG
     std::cout << "MDB: got sentence starter: " << startk << "\n";
+#endif
     auto iter = kvdb->find(startk);
     while (iter != kvdb->end()) {
         string str = Rand::randomKey(iter->second)->val;
+#ifdef DEBUG
         std::cout << "MDB: str " << str << "\n";
+#endif
         ret = ret + " " + str;
         iter = kvdb->find(str);
     }
+#ifdef DEBUG
     std::cout << "MDB: built sentence " << ret << "\n";
+#endif
     return ret;
 }

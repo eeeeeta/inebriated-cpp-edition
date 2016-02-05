@@ -107,8 +107,19 @@ public:
  */
         string build_sentence(void);
         void recalcWeights(void);
-        void doSavingThings(void);
-        void doReadingThings(void);
+/**
+ * Saves the entire learned corpus, in standard inebriated DB format, to the given filename.
+ * Overwrites any existing file using that filename.
+ * Prints any errors out to stderr.
+ * @returns true if saving successful, false if an error occured
+ */
+        bool saveCorpus(std::string filename);
+/**
+ * Reads a corpus, in standard inebriated DB format, from the given filename.
+ * Prints any errors out to stderr.
+ * @returns true if load successful, false if an error occurred.
+ */
+        bool readCorpus(std::string filename);
     };
 }
 #endif
